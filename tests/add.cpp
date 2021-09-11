@@ -22,18 +22,40 @@ int main()
     }
     end = std::chrono::steady_clock::now();
     printf("%lu\n", std::chrono::duration_cast<std::chrono::nanoseconds> (end - begin).count());
+    printf("%f %f %f %f\n", float4_get(b, 0),float4_get(b, 1), float4_get(b, 2), float4_get(b, 3));
     
-    // printf("%f %f %f %f\n", b[0], b[1], b[2], b[3]);
-
 
     begin = std::chrono::steady_clock::now();
+    __m128 _a = _mm_set_ps(1, 2, 3, 4);
+    __m128 _b = _mm_set_ps(0, 0, 0, 0);
     for(int i = 0; i < 100000; i++)
     {
-        b = _mm_add_ps(a, b);
+        _b = _mm_add_ps(_a, _b);
     }
     end = std::chrono::steady_clock::now();
     printf("%lu\n", std::chrono::duration_cast<std::chrono::nanoseconds> (end - begin).count());
-    // printf("%f %f %f %f\n", b[0], b[1], b[2], b[3]);
+    printf("%f %f %f %f\n", float4_get(_b, 0),float4_get(_b, 1), float4_get(_b, 2), float4_get(_b, 3));
+
+
+    begin = std::chrono::steady_clock::now();
+
+    float __a[4] = {1, 2, 3, 4};
+    float __b[4] = {0, 0, 0, 0};
+
+    for(int i = 0; i < 100000; i++)
+    {
+        __b[0] = __a[0] + __b[0];
+        __b[1] = __a[1] + __b[1];
+        __b[2] = __a[2] + __b[2];
+        __b[3] = __a[3] + __b[3];
+    }
+    
+    end = std::chrono::steady_clock::now();
+    
+    printf("%lu\n", std::chrono::duration_cast<std::chrono::nanoseconds> (end - begin).count());
+    
+    printf("%f %f %f %f\n", __b[0], __b[1], __b[2], __b[3]);
+    
 
     return 0;
 }

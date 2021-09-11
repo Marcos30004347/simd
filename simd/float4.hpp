@@ -9,7 +9,7 @@
 
 #define FLOAT4_SSE 1
 
-#define float4_get(v,i) _mm_cvtss_f32(_mm_shuffle_ps(v, v, _MM_SHUFFLE(0, 0, 0, i)))
+#define float4_get(v,i) _mm_cvtss_f32(_mm_shuffle_ps(v, v, _MM_SHUFFLE(0, 0, 0, 3 - i)))
 
 typedef __m128 float4;
 

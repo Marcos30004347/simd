@@ -11,7 +11,7 @@
 
 float4 (*float4_add)(float4, float4);
 float8 (*float8_add)(float8, float8);
-float16 (*float16_add)(float16, float16);
+float16(*float16_add)(float16, float16);
 
 simd_func float4 float4_add_sse(float4 i, float4 k)
 {
